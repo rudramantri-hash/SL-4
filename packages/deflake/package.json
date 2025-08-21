@@ -1,0 +1,29 @@
+{
+  "name": "deflake",
+  "version": "1.0.0",
+  "description": "Test reliability toolkit with MCP-based auto-healing",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "deflake": "ts-node src/cli/index.ts",
+    "start": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.40.0",
+    "yargs": "^17.7.2",
+    "express": "^4.18.2",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/yargs": "^17.0.32",
+    "@types/express": "^4.17.21",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0"
+  },
+  "keywords": ["playwright", "testing", "reliability", "mcp", "auto-heal"],
+  "author": "Test Reliability Team",
+  "license": "MIT"
+}

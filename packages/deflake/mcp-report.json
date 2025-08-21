@@ -1,0 +1,20 @@
+{
+  "summary": {
+    "totalTests": 0,
+    "passed": 0,
+    "failed": 0,
+    "flaky": 0,
+    "autoHealed": 0,
+    "averageSelectorScore": 0
+  },
+  "tests": [],
+  "autoHealing": {
+    "totalAttempts": 0,
+    "successful": 0,
+    "failed": 0,
+    "commonIssues": []
+  },
+  "recommendations": [
+    "Consider improving selector quality - current average score is below 0.8"
+  ]
+}
