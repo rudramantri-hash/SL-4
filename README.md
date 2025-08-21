@@ -94,5 +94,3 @@ npx deflake run --spec tests/*.spec.ts --headed --retries 2
 MIT License - see LICENSE file for details.
 
 ---
-
-**Built with ❤️ for reliable testing**
