@@ -26,10 +26,11 @@ A comprehensive test reliability toolkit built around Playwright with **Model Co
 - Auto-wait for element conditions (`toBeVisible`, `toBeEnabled`)
 - Network state monitoring and UI stability checks
 
-### 🧪 **Test Isolation & Data Seeding**
+### �� **Test Isolation & Real Webpage Testing**
 - Fresh browser context per test
-- Seeded test data for consistent state
+- **Real website testing only** - no mock backends
 - Network control and third-party blocking
+- Cross-browser compatibility testing
 
 ## 🏗️ Architecture
 
@@ -37,15 +38,22 @@ A comprehensive test reliability toolkit built around Playwright with **Model Co
 packages/deflake/
 ├── src/
 │   ├── core/
-│   │   └── mcp.ts              # Core MCP framework
+│   │   ├── mcp.ts              # Core MCP framework
+│   │   ├── selectors.ts         # Smart selector utilities
+│   │   ├── isolation.ts         # Test isolation utilities
+│   │   ├── waits.ts             # Intelligent wait strategies
+│   │   └── dataSeeder.ts        # Test data management
 │   ├── reporters/
 │   │   └── mcpReporter.ts      # Custom reporter with auto-healing stats
-│   ├── test-setup.ts           # Playwright fixtures with MCP integration
+│   ├── setup/
+│   │   ├── global-setup.ts     # Global test setup
+│   │   └── global-teardown.ts  # Global test cleanup
 │   ├── cli/
 │   │   └── index.ts            # CLI interface
 │   └── index.ts                # Main exports
 ├── tests/
-│   └── mcp-demo.spec.ts        # Demo tests showcasing MCP
+│   ├── amazon.spec.ts          # Real Amazon website tests
+│   └── mcp-demo.spec.ts        # Demo tests with real websites
 ├── playwright.config.ts        # Playwright config with MCP reporter
 └── package.json
 ```
@@ -58,26 +66,25 @@ cd packages/deflake
 npm install
 ```
 
-### 2. Start Backend Server
+### 2. Run Tests on Real Websites
 ```bash
-cd ../backend
-npm install
-npm start
-```
+# Test Amazon website functionality
+npx playwright test tests/amazon.spec.ts
 
-### 3. Run Tests with MCP
-```bash
-cd ../deflake
+# Run MCP demo tests
 npx playwright test tests/mcp-demo.spec.ts
+
+# Run all tests
+npx playwright test
 ```
 
-### 4. Use CLI Commands
+### 3. Use CLI Commands
 ```bash
 # Show test plan
 npx deflake plan
 
-# Validate selectors against URL
-npx deflake validate --url http://localhost:3000/login
+# Validate selectors against real URL
+npx deflake validate --url https://www.amazon.com
 
 # Run tests with auto-healing
 npx deflake run --spec tests/*.spec.ts --headed --retries 2
@@ -90,12 +97,11 @@ npx deflake run --spec tests/*.spec.ts --headed --retries 2
 const testPlan: Plan = {
   steps: [
     {
-      id: 'login',
-      intent: 'authenticate user',
+      id: 'search',
+      intent: 'search for products',
       targets: [
-        { key: 'email', role: 'textbox', label: 'Email' },
-        { key: 'password', role: 'textbox', label: 'Password' },
-        { key: 'submit', role: 'button', name: 'Log in' }
+        { key: 'search-input', role: 'searchbox', name: 'Search' },
+        { key: 'search-button', role: 'button', name: 'Search' }
       ]
     }
   ]
@@ -104,43 +110,59 @@ const testPlan: Plan = {
 
 ### Use MCP in Tests
 ```typescript
-import { test, expect } from './test-setup';
+import { test } from '@playwright/test';
+import { MCP, Plan } from '../src/core/mcp';
 
-test('login flow with MCP auto-healing', async ({ page, mcp }) => {
-  await page.goto('/login');
+test('Amazon product search', async ({ page }) => {
+  const mcp = new MCP({ plan: testPlan });
   
-  const loginStep = mcp.getStep('login');
+  // Navigate to real website
+  await page.goto('https://www.amazon.com');
   
-  // Ground: Generate best selector
-  const emailLocator = await mcp.ground(page, loginStep.targets[0]);
+  // Use MCP to find and interact with elements
+  const searchInput = await mcp.ground(page, { key: 'search-input', role: 'searchbox' });
+  await mcp.safeFill(searchInput, 'laptop');
   
-  // Validate: Check uniqueness, visibility, enabled
-  await mcp.validate(emailLocator);
-  
-  // Action: Safe fill with auto-healing
-  await mcp.safeFill(emailLocator, 'test@example.com', 'email input');
+  const searchButton = await mcp.ground(page, { key: 'search-button', role: 'button' });
+  await mcp.safeClick(searchButton);
 });
 ```
+
+## 🌐 Real Website Testing
+
+### Supported Websites
+- **Amazon** - E-commerce functionality testing
+- **Any public website** - Configurable domain testing
+- **Cross-browser compatibility** - Chrome, Firefox, Safari
+
+### Test Isolation
+- **Fresh browser context** per test
+- **No cross-test contamination**
+- **Real network conditions**
+- **Production-like environment**
+
+### Network Control
+- **Third-party blocking** for analytics/tracking
+- **Domain allowlisting** for specific websites
+- **Request monitoring** for stability
 
 ## 🔧 Configuration
 
-### Playwright Config
+### Playwright Configuration
 ```typescript
 // playwright.config.ts
 export default defineConfig({
-  reporter: [
-    ['html', { outputFolder: 'playwright-report' }],
-    ['./src/reporters/mcpReporter.ts', { outputFile: 'mcp-report.json' }]
-  ],
-  use: {
-    baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure'
-  }
+  testDir: './tests',
+  retries: process.env.CI ? 3 : 2,
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } }
+  ]
 });
 ```
 
-### MCP Options
+### MCP Configuration
 ```typescript
 const mcp = new MCP({
   plan: testPlan,
@@ -149,114 +171,97 @@ const mcp = new MCP({
 });
 ```
 
-## 📊 MCP Reporter
+## 📊 Flakiness Detection
 
-The custom reporter generates detailed reports including:
-- **Auto-healing statistics**: Success/failure rates
-- **Selector scores**: Performance metrics for each selector method
-- **Flakiness detection**: Browser vs test-level issues
-- **Recommendations**: Actionable improvements
+### Built-in Analysis
+- **Selector stability scoring**
+- **Auto-healing statistics**
+- **Cross-browser consistency**
+- **Performance metrics**
 
-### Sample Report
-```json
-{
-  "summary": {
-    "totalTests": 3,
-    "passed": 3,
-    "failed": 0,
-    "autoHealed": 1,
-    "averageSelectorScore": 0.92
-  },
-  "autoHealing": {
-    "totalAttempts": 1,
-    "successful": 1,
-    "failed": 0
-  },
-  "recommendations": [
-    "All tests passed successfully",
-    "Auto-healing resolved 1 selector issue"
-  ]
-}
+### Custom Reporter
+```typescript
+reporter: [
+  ['./src/reporters/mcpReporter.ts', {
+    outputFile: 'flakiness-report.json',
+    enableFlakinessDetection: true,
+    enableRootCauseAnalysis: true
+  }]
+]
 ```
+
+## 🚫 What We Don't Support
+
+- ❌ **Mock backends** - Only real websites
+- ❌ **Local development servers** - Production-like testing
+- ❌ **Hardcoded test data** - Dynamic, real-world scenarios
+- ❌ **Arbitrary timeouts** - Intelligent waiting strategies
 
 ## 🎯 Best Practices
 
-### 1. **Selector Priority**
-1. **Accessibility-first**: `getByRole`, `getByLabel`, `getByPlaceholder`
-2. **Test IDs**: `[data-testid="..."]`
-3. **Scoped CSS**: `:has()` with stable neighbors
-4. **Structural CSS**: Last resort only
-
-### 2. **Wait Strategies**
+### 1. **Use Real URLs**
 ```typescript
-// ✅ Good: Element-driven waits
-await expect(locator).toBeVisible();
-await expect(locator).toBeEnabled();
+// ✅ Good - Real website
+await page.goto('https://www.amazon.com');
 
-// ❌ Bad: Fixed timeouts
-await page.waitForTimeout(2000);
+// ❌ Bad - Local development
+await page.goto('http://localhost:3000');
+```
+
+### 2. **Leverage MCP Auto-Healing**
+```typescript
+// ✅ Good - MCP handles selector failures
+const element = await mcp.ground(page, target);
+await mcp.safeClick(element);
+
+// ❌ Bad - Brittle selectors
+await page.click('#specific-id');
 ```
 
 ### 3. **Test Isolation**
 ```typescript
-// Fresh context per test
-test.beforeEach(async ({ page }) => {
-  await page.goto('/');
-  // Clear any existing state
-});
+// ✅ Good - Fresh context per test
+const testContext = await createIsolatedContext(browser);
+
+// ❌ Bad - Shared state
+await page.goto('/login');
 ```
-
-## 🚨 CI Guardrails
-
-MCP enforces automated rules in CI:
-- **Selector score threshold**: ≥ 0.8
-- **Zero raw sleeps**: Pipeline fails if `waitForTimeout` found
-- **Retry budget**: Respect configured retry limits
-- **Flake rate monitoring**: < 5% over consecutive runs
 
 ## 🔍 Troubleshooting
 
 ### Common Issues
-
-1. **Selector Score Too Low**
-   - Add more specific attributes (role, name, label)
-   - Use `data-testid` for critical elements
-   - Avoid deep CSS selectors
-
-2. **Auto-Healing Failing**
-   - Check element visibility and enabled state
-   - Verify frame/shadow root context
-   - Review fallback selector strategies
-
-3. **High Flakiness**
-   - Review test isolation
-   - Check for shared state between tests
-   - Verify wait strategies
+1. **Network connectivity** - Ensure internet access
+2. **Website changes** - MCP auto-healing handles most cases
+3. **Rate limiting** - Add delays between tests if needed
 
 ### Debug Mode
-```typescript
-// Enable verbose logging
-const mcp = new MCP({
-  plan: testPlan,
-  scoreThreshold: 0.8,
-  enableAutoHeal: true,
-  debug: true  // Enable detailed logging
-});
+```bash
+# Run with headed mode for debugging
+npx playwright test --headed
+
+# Enable trace recording
+npx playwright test --trace on
 ```
 
-## 📚 Learn More
+## 📈 Performance
 
-- [Playwright Best Practices](https://playwright.dev/docs/best-practices)
-- [Accessibility Testing](https://playwright.dev/docs/accessibility-testing)
-- [Test Isolation](https://playwright.dev/docs/test-isolation)
+### Test Execution
+- **Parallel execution** across browsers
+- **Smart waiting** reduces unnecessary delays
+- **Selector caching** improves performance
+- **Auto-healing** reduces test failures
+
+### Resource Usage
+- **Minimal memory footprint**
+- **Efficient DOM traversal**
+- **Optimized network monitoring**
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass
-5. Submit a pull request
+1. **Fork the repository**
+2. **Create feature branch**
+3. **Write tests for real websites**
+4. **Submit pull request**
 
 ## 📄 License
 
@@ -264,4 +269,4 @@ MIT License - see LICENSE file for details.
 
 ---
 
-**Built with ❤️ for reliable testing**
+**Built with ❤️ for reliable, flake-free test automation on real websites.**

@@ -1,0 +1,115 @@
+{
+  "summary": {
+    "totalTests": 10,
+    "passed": 1,
+    "failed": 9,
+    "flaky": 6,
+    "averageSelectorScore": 6.333333333333333
+  },
+  "tests": [
+    {
+      "title": "navigate Amazon categories",
+      "status": "passed",
+      "retries": 0,
+      "selectorScores": [],
+      "duration": 2975
+    },
+    {
+      "title": "search for products on Amazon",
+      "status": "failed",
+      "retries": 0,
+      "selectorScores": [
+        {
+          "target": "#twotabsearchtextbox",
+          "method": "element",
+          "score": 7,
+          "fallbackUsed": false
+        }
+      ],
+      "failureReason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#twotabsearchtextbox')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#twotabsearchtextbox')\u001b[22m\n",
+      "duration": 15824
+    },
+    {
+      "title": "add item to cart on Amazon",
+      "status": "failed",
+      "retries": 0,
+      "selectorScores": [],
+      "failureReason": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================",
+      "duration": 34355
+    },
+    {
+      "title": "Amazon login form interaction",
+      "status": "failed",
+      "retries": 0,
+      "selectorScores": [],
+      "failureReason": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"domcontentloaded\" event fired\n  \"load\" event fired\n============================================================",
+      "duration": 35271
+    },
+    {
+      "title": "Amazon login form interaction",
+      "status": "failed",
+      "retries": 1,
+      "selectorScores": [
+        {
+          "target": "#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button",
+          "method": "descendant",
+          "score": 6,
+          "fallbackUsed": false
+        }
+      ],
+      "failureReason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\u001b[22m\n",
+      "duration": 12452
+    },
+    {
+      "title": "search for products on Amazon",
+      "status": "failed",
+      "retries": 1,
+      "selectorScores": [],
+      "failureReason": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================",
+      "duration": 32638
+    },
+    {
+      "title": "Amazon login form interaction",
+      "status": "failed",
+      "retries": 2,
+      "selectorScores": [
+        {
+          "target": "#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button",
+          "method": "descendant",
+          "score": 6,
+          "fallbackUsed": false
+        }
+      ],
+      "failureReason": "Error: expect.toBeVisible: Error: strict mode violation: locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button') resolved to 3 elements:\n    1) <div class=\"nav-div\" id=\"nav-link-accountList\">…</div> aka locator('#nav-link-accountList')\n    2) <a data-nav-role=\"signin\" class=\"nav-action-signin-button\" data-nav-ref=\"nav_custrec_signin\" href=\"https://www.amazon.com/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3Fref_%3Dnav_custrec_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0\">…</a> aka getByRole('link', { name: 'Sign in', exact: true })\n    3) <a class=\"nav-a\" aria-label=\"New to Amazon? Start here to create an account\" href=\"https://www.amazon.com/ap/register?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3F_encoding%3DUTF8%26ref_%3Dnav_custrec_newcust&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth…>Start here.</a> aka getByRole('link', { name: 'New to Amazon? Start here to' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\u001b[22m\n",
+      "duration": 2651
+    },
+    {
+      "title": "add item to cart on Amazon",
+      "status": "failed",
+      "retries": 1,
+      "selectorScores": [],
+      "failureReason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\u001b[22m\n",
+      "duration": 19398
+    },
+    {
+      "title": "add item to cart on Amazon",
+      "status": "failed",
+      "retries": 2,
+      "selectorScores": [],
+      "failureReason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\u001b[22m\n",
+      "duration": 20483
+    },
+    {
+      "title": "search for products on Amazon",
+      "status": "failed",
+      "retries": 2,
+      "selectorScores": [],
+      "failureReason": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================",
+      "duration": 31933
+    }
+  ],
+  "recommendations": [
+    "High flakiness detected - review test isolation and wait strategies",
+    "Failed tests detected - review error messages and selector strategies"
+  ]
+}

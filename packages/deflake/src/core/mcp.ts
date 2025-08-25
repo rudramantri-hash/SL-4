@@ -30,18 +30,15 @@ export interface SelectorCandidate {
 export class MCP {
   private plan: Plan;
   private scoreThreshold: number;
-  private enableAutoHeal: boolean;
   private selectorCache: Map<string, SelectorCandidate[]> = new Map();
   private failureSignatures: Map<string, string[]> = new Map();
 
   constructor(options: {
     plan: Plan;
     scoreThreshold?: number;
-    enableAutoHeal?: boolean;
   }) {
     this.plan = options.plan;
     this.scoreThreshold = options.scoreThreshold || 0.8;
-    this.enableAutoHeal = options.enableAutoHeal || true;
   }
 
   async loadPlan(): Promise<void> {
@@ -93,12 +90,7 @@ export class MCP {
       await locator.click();
       console.log(`MCP: Safe click executed for ${context || 'element'}`);
     } catch (error) {
-      if (this.enableAutoHeal) {
-        console.log(`MCP: Auto-healing click failure for ${context || 'element'}`);
-        await this.autoHealClick(locator, context);
-      } else {
-        throw error;
-      }
+      throw error;
     }
   }
 
@@ -106,131 +98,90 @@ export class MCP {
     try {
       await this.validate(locator);
       await locator.fill(value);
-      console.log(`MCP: Safe fill executed for ${context || 'element'} with value: ${value}`);
+      console.log(`MCP: Safe fill executed for ${context || 'element'}`);
     } catch (error) {
-      if (this.enableAutoHeal) {
-        console.log(`MCP: Auto-healing fill failure for ${context || 'element'}`);
-        await this.autoHealFill(locator, value, context);
-      } else {
-        throw error;
-      }
+      throw error;
     }
   }
 
-  async waitFor(page: Page, target: Partial<Target>): Promise<Locator> {
-    const locator = await this.ground(page, target as Target);
-    await expect(locator).toBeVisible();
-    return locator;
+  async safeExpect(locator: Locator, matcher: any, context?: string): Promise<void> {
+    try {
+      await this.validate(locator);
+      await expect(locator).toHaveText(matcher);
+      console.log(`MCP: Safe expect executed for ${context || 'element'}`);
+    } catch (error) {
+      throw error;
+    }
   }
 
   private async generateSelectorCandidates(page: Page, target: Target): Promise<SelectorCandidate[]> {
     const candidates: SelectorCandidate[] = [];
+    
+    // Try different selector strategies
+    const strategies = [
+      { method: 'testId', selector: `[data-testid="${target.testId}"]` },
+      { method: 'role', selector: `[role="${target.role}"]` },
+      { method: 'label', selector: `[aria-label="${target.label}"]` },
+      { method: 'name', selector: `[name="${target.name}"]` },
+      { method: 'placeholder', selector: `[placeholder="${target.placeholder}"]` },
+      { method: 'fallback', selector: target.fallback || '' }
+    ];
 
-    // Priority 1: Accessibility-first selectors
-    if (target.role && target.name) {
-      const locator = page.getByRole(target.role as any, { name: target.name });
-      candidates.push({
-        selector: `getByRole('${target.role}', { name: '${target.name}' })`,
-        method: 'getByRole',
-        score: 0.95,
-        locator
-      });
-    }
-
-    if (target.label) {
-      const locator = page.getByLabel(target.label);
-      candidates.push({
-        selector: `getByLabel('${target.label}')`,
-        method: 'getByLabel',
-        score: 0.90,
-        locator
-      });
-    }
-
-    if (target.placeholder) {
-      const locator = page.getByPlaceholder(target.placeholder);
-      candidates.push({
-        selector: `getByPlaceholder('${target.placeholder}')`,
-        method: 'getByPlaceholder',
-        score: 0.85,
-        locator
-      });
-    }
-
-    // Priority 2: Test IDs
-    if (target.testId) {
-      const locator = page.locator(`[data-testid="${target.testId}"]`);
-      candidates.push({
-        selector: `[data-testid="${target.testId}"]`,
-        method: 'data-testid',
-        score: 0.80,
-        locator
-      });
-    }
-
-    // Priority 3: Scoped CSS with :has()
-    if (target.fallback) {
-      const locator = page.locator(target.fallback);
-      candidates.push({
-        selector: target.fallback,
-        method: 'scoped-css',
-        score: 0.70,
-        locator
-      });
-    }
-
-    // Priority 4: Structural CSS (last resort)
-    const structuralSelector = this.generateStructuralSelector(target);
-    if (structuralSelector) {
-      const locator = page.locator(structuralSelector);
-      candidates.push({
-        selector: structuralSelector,
-        method: 'structural-css',
-        score: 0.50,
-        locator
-      });
+    for (const strategy of strategies) {
+      if (strategy.selector) {
+        try {
+          const locator = page.locator(strategy.selector);
+          const count = await locator.count();
+          
+          if (count > 0) {
+            const score = this.calculateSelectorScore(strategy, count, target);
+            candidates.push({
+              selector: strategy.selector,
+              method: strategy.method,
+              score,
+              locator
+            });
+          }
+        } catch (error) {
+          // Skip invalid selectors
+        }
+      }
     }
 
     // Sort by score (highest first)
     return candidates.sort((a, b) => b.score - a.score);
   }
 
-  private generateStructuralSelector(target: Target): string | null {
-    if (target.role) {
-      return `${target.role}:has-text("${target.name || target.label || ''}")`;
+  private calculateSelectorScore(strategy: any, count: number, target: Target): number {
+    let score = 1.0;
+
+    // Penalize multiple matches
+    if (count > 1) {
+      score -= (count - 1) * 0.1;
     }
-    return null;
-  }
 
-  private async autoHealClick(locator: Locator, context?: string): Promise<void> {
-    // Try alternative strategies
-    try {
-      // Wait a bit and retry
-      await locator.waitFor({ state: 'visible', timeout: 5000 });
-      await locator.click();
-      console.log(`MCP: Auto-heal successful for ${context || 'element'}`);
-    } catch (error) {
-      console.log(`MCP: Auto-heal failed for ${context || 'element'}`);
-      throw error;
+    // Prefer more specific selectors
+    switch (strategy.method) {
+      case 'testId':
+        score += 0.2;
+        break;
+      case 'role':
+        score += 0.1;
+        break;
+      case 'label':
+        score += 0.15;
+        break;
+      case 'name':
+        score += 0.05;
+        break;
+      case 'placeholder':
+        score += 0.05;
+        break;
+      case 'fallback':
+        score -= 0.1;
+        break;
     }
-  }
 
-  private async autoHealFill(locator: Locator, value: string, context?: string): Promise<void> {
-    try {
-      await locator.waitFor({ state: 'visible', timeout: 5000 });
-      await locator.fill(value);
-      console.log(`MCP: Auto-heal fill successful for ${context || 'element'}`);
-    } catch (error) {
-      console.log(`MCP: Auto-heal fill failed for ${context || 'element'}`);
-      throw error;
-    }
-  }
-
-  getSelectorCache(): Map<string, SelectorCandidate[]> {
-    return this.selectorCache;
-  }
-
-  getFailureSignatures(): Map<string, string[]> {
-    return this.failureSignatures;
+    return Math.max(0, Math.min(1, score));
   }
 }

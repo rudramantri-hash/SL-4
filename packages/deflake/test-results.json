@@ -4,21 +4,31 @@
     "rootDir": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests",
     "forbidOnly": false,
     "fullyParallel": true,
-    "globalSetup": null,
-    "globalTeardown": null,
+    "globalSetup": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/src/setup/global-setup.ts",
+    "globalTeardown": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/src/setup/global-teardown.ts",
     "globalTimeout": 0,
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 7
+      "flakinessDetection": {
+        "enabled": true,
+        "patternDetection": true,
+        "rootCauseAnalysis": true,
+        "selectorStability": true,
+        "trendAnalysis": true,
+        "correlationAnalysis": true,
+        "mlPatternDetection": true
+      },
+      "actualWorkers": 4
     },
     "preserveOutput": "always",
     "reporter": [
       [
         "html",
         {
-          "outputFolder": "playwright-report"
+          "outputFolder": "playwright-report",
+          "open": "never"
         }
       ],
       [
@@ -30,8 +40,17 @@
       [
         "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/src/reporters/mcpReporter.ts",
         {
-          "outputFile": "mcp-report.json"
+          "outputFile": "flakiness-report.json",
+          "enableFlakinessDetection": true,
+          "enableRootCauseAnalysis": true,
+          "enableSelectorStability": true,
+          "enablePatternDetection": true,
+          "enableTrendAnalysis": true
         }
+      ],
+      [
+        "list",
+        null
       ]
     ],
     "reportSlowTests": {
@@ -43,9 +62,18 @@
       {
         "outputDir": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results",
         "repeatEach": 1,
-        "retries": 1,
+        "retries": 2,
         "metadata": {
-          "actualWorkers": 7
+          "flakinessDetection": {
+            "enabled": true,
+            "patternDetection": true,
+            "rootCauseAnalysis": true,
+            "selectorStability": true,
+            "trendAnalysis": true,
+            "correlationAnalysis": true,
+            "mlPatternDetection": true
+          },
+          "actualWorkers": 4
         },
         "id": "chromium",
         "name": "chromium",
@@ -54,14 +82,23 @@
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
         ],
-        "timeout": 30000
+        "timeout": 60000
       },
       {
         "outputDir": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results",
         "repeatEach": 1,
-        "retries": 1,
+        "retries": 2,
         "metadata": {
-          "actualWorkers": 7
+          "flakinessDetection": {
+            "enabled": true,
+            "patternDetection": true,
+            "rootCauseAnalysis": true,
+            "selectorStability": true,
+            "trendAnalysis": true,
+            "correlationAnalysis": true,
+            "mlPatternDetection": true
+          },
+          "actualWorkers": 4
         },
         "id": "firefox",
         "name": "firefox",
@@ -70,14 +107,23 @@
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
         ],
-        "timeout": 30000
+        "timeout": 60000
       },
       {
         "outputDir": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results",
         "repeatEach": 1,
-        "retries": 1,
+        "retries": 2,
         "metadata": {
-          "actualWorkers": 7
+          "flakinessDetection": {
+            "enabled": true,
+            "patternDetection": true,
+            "rootCauseAnalysis": true,
+            "selectorStability": true,
+            "trendAnalysis": true,
+            "correlationAnalysis": true,
+            "mlPatternDetection": true
+          },
+          "actualWorkers": 4
         },
         "id": "webkit",
         "name": "webkit",
@@ -86,7 +132,7 @@
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
         ],
-        "timeout": 30000
+        "timeout": 60000
       }
     ],
     "shard": null,
@@ -94,34 +140,29 @@
     "updateSourceMethod": "patch",
     "version": "1.55.0",
     "workers": 7,
-    "webServer": {
-      "command": "cd ../backend && npm start",
-      "url": "http://localhost:3000",
-      "reuseExistingServer": true,
-      "timeout": 120000
-    }
+    "webServer": null
   },
   "suites": [
     {
-      "title": "mcp-demo.spec.ts",
-      "file": "mcp-demo.spec.ts",
+      "title": "amazon.spec.ts",
+      "file": "amazon.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "MCP Auto-Healing Demo",
-          "file": "mcp-demo.spec.ts",
+          "title": "Amazon Website Tests",
+          "file": "amazon.spec.ts",
           "line": 3,
           "column": 6,
           "specs": [
             {
-              "title": "login flow with MCP auto-healing",
+              "title": "search for products on Amazon",
               "ok": false,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 30000,
+                  "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
@@ -131,66 +172,182 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 1,
+                      "duration": 15824,
                       "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#twotabsearchtextbox')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#twotabsearchtextbox')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#twotabsearchtextbox')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#twotabsearchtextbox')\u001b[22m\n\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:12:31",
+                        "location": {
+                          "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                          "column": 31,
+                          "line": 12
+                        },
+                        "snippet": "  10 |     // Search for a product using MCP\n  11 |     const searchInput = page.locator('#twotabsearchtextbox');\n> 12 |     await expect(searchInput).toBeVisible();\n     |                               ^\n  13 |     await searchInput.fill('laptop');\n  14 |     \n  15 |     // Click search button"
                       },
                       "errors": [
                         {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "location": {
+                            "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                            "column": 31,
+                            "line": 12
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#twotabsearchtextbox')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#twotabsearchtextbox')\u001b[22m\n\n\n  10 |     // Search for a product using MCP\n  11 |     const searchInput = page.locator('#twotabsearchtextbox');\n> 12 |     await expect(searchInput).toBeVisible();\n     |                               ^\n  13 |     await searchInput.fill('laptop');\n  14 |     \n  15 |     // Click search button\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:12:31"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-21T05:17:32.586Z",
+                      "startTime": "2025-08-25T11:00:17.007Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                        "column": 31,
+                        "line": 12
+                      }
                     },
                     {
-                      "workerIndex": 13,
+                      "workerIndex": 4,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 1,
+                      "duration": 32638,
                       "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                        "message": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================",
+                        "stack": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:8:16",
+                        "location": {
+                          "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                          "column": 16,
+                          "line": 8
+                        },
+                        "snippet": "   6 |     \n   7 |     // Wait for page to load\n>  8 |     await page.waitForLoadState('networkidle');\n     |                ^\n   9 |     \n  10 |     // Search for a product using MCP\n  11 |     const searchInput = page.locator('#twotabsearchtextbox');"
                       },
                       "errors": [
                         {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "location": {
+                            "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                            "column": 16,
+                            "line": 8
+                          },
+                          "message": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================\n\n   6 |     \n   7 |     // Wait for page to load\n>  8 |     await page.waitForLoadState('networkidle');\n     |                ^\n   9 |     \n  10 |     // Search for a product using MCP\n  11 |     const searchInput = page.locator('#twotabsearchtextbox');\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:8:16"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 1,
-                      "startTime": "2025-08-21T05:17:32.908Z",
+                      "startTime": "2025-08-25T11:00:33.942Z",
                       "annotations": [],
                       "attachments": [
                         {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium-retry1/error-context.md"
+                        },
+                        {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/mcp-demo-MCP-Auto-Healing--1d130--flow-with-MCP-auto-healing-chromium-retry1/trace.zip"
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium-retry1/trace.zip"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                        "column": 16,
+                        "line": 8
+                      }
+                    },
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 31933,
+                      "error": {
+                        "message": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================",
+                        "stack": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:8:16",
+                        "location": {
+                          "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                          "column": 16,
+                          "line": 8
+                        },
+                        "snippet": "   6 |     \n   7 |     // Wait for page to load\n>  8 |     await page.waitForLoadState('networkidle');\n     |                ^\n   9 |     \n  10 |     // Search for a product using MCP\n  11 |     const searchInput = page.locator('#twotabsearchtextbox');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                            "column": 16,
+                            "line": 8
+                          },
+                          "message": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================\n\n   6 |     \n   7 |     // Wait for page to load\n>  8 |     await page.waitForLoadState('networkidle');\n     |                ^\n   9 |     \n  10 |     // Search for a product using MCP\n  11 |     const searchInput = page.locator('#twotabsearchtextbox');\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:8:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-08-25T11:01:07.478Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-search-for-products-on-Amazon-chromium-retry2/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                        "column": 16,
+                        "line": 8
+                      }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "4637cdedc66d7cc14d4f-e29dea95c874ee293f93",
-              "file": "mcp-demo.spec.ts",
+              "id": "884a02874a5c41c56569-4634be8be96f82c451ea",
+              "file": "amazon.spec.ts",
               "line": 4,
               "column": 7
             },
             {
-              "title": "search functionality with MCP",
+              "title": "add item to cart on Amazon",
               "ok": false,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 30000,
+                  "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
@@ -200,66 +357,182 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "failed",
-                      "duration": 1,
+                      "duration": 34355,
                       "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                        "message": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================",
+                        "stack": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:32:16",
+                        "location": {
+                          "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                          "column": 16,
+                          "line": 32
+                        },
+                        "snippet": "  30 |     \n  31 |     // Wait for results to load\n> 32 |     await page.waitForLoadState('networkidle');\n     |                ^\n  33 |     \n  34 |     // Click on first product\n  35 |     const firstProduct = page.locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first();"
                       },
                       "errors": [
                         {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "location": {
+                            "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                            "column": 16,
+                            "line": 32
+                          },
+                          "message": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"load\" event fired\n============================================================\n\n  30 |     \n  31 |     // Wait for results to load\n> 32 |     await page.waitForLoadState('networkidle');\n     |                ^\n  33 |     \n  34 |     // Click on first product\n  35 |     const firstProduct = page.locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first();\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:32:16"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-21T05:17:32.579Z",
+                      "startTime": "2025-08-25T11:00:17.007Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                        "column": 16,
+                        "line": 32
+                      }
                     },
                     {
-                      "workerIndex": 10,
+                      "workerIndex": 5,
                       "parallelIndex": 1,
                       "status": "failed",
-                      "duration": 1,
+                      "duration": 19398,
                       "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\u001b[22m\n\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:36:32",
+                        "location": {
+                          "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                          "column": 32,
+                          "line": 36
+                        },
+                        "snippet": "  34 |     // Click on first product\n  35 |     const firstProduct = page.locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first();\n> 36 |     await expect(firstProduct).toBeVisible();\n     |                                ^\n  37 |     await firstProduct.click();\n  38 |     \n  39 |     // Wait for product page to load"
                       },
                       "errors": [
                         {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "location": {
+                            "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                            "column": 32,
+                            "line": 36
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\u001b[22m\n\n\n  34 |     // Click on first product\n  35 |     const firstProduct = page.locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first();\n> 36 |     await expect(firstProduct).toBeVisible();\n     |                                ^\n  37 |     await firstProduct.click();\n  38 |     \n  39 |     // Wait for product page to load\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:36:32"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 1,
-                      "startTime": "2025-08-21T05:17:32.909Z",
+                      "startTime": "2025-08-25T11:00:52.482Z",
                       "annotations": [],
                       "attachments": [
                         {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium-retry1/error-context.md"
+                        },
+                        {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/mcp-demo-MCP-Auto-Healing-Demo-search-functionality-with-MCP-chromium-retry1/trace.zip"
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium-retry1/trace.zip"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                        "column": 32,
+                        "line": 36
+                      }
+                    },
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 20483,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\u001b[22m\n\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:36:32",
+                        "location": {
+                          "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                          "column": 32,
+                          "line": 36
+                        },
+                        "snippet": "  34 |     // Click on first product\n  35 |     const firstProduct = page.locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first();\n> 36 |     await expect(firstProduct).toBeVisible();\n     |                                ^\n  37 |     await firstProduct.click();\n  38 |     \n  39 |     // Wait for product page to load"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                            "column": 32,
+                            "line": 36
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first()\u001b[22m\n\n\n  34 |     // Click on first product\n  35 |     const firstProduct = page.locator('[data-component-type=\"s-search-results\"] .s-result-item h2 a').first();\n> 36 |     await expect(firstProduct).toBeVisible();\n     |                                ^\n  37 |     await firstProduct.click();\n  38 |     \n  39 |     // Wait for product page to load\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:36:32"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-08-25T11:01:12.632Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-add-item-to-cart-on-Amazon-chromium-retry2/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                        "column": 32,
+                        "line": 36
+                      }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "4637cdedc66d7cc14d4f-614ff9c324a6b4ac88cf",
-              "file": "mcp-demo.spec.ts",
-              "line": 38,
+              "id": "884a02874a5c41c56569-d345a27301abea041521",
+              "file": "amazon.spec.ts",
+              "line": 28,
               "column": 7
             },
             {
-              "title": "add to cart with MCP",
-              "ok": false,
+              "title": "navigate Amazon categories",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 30000,
+                  "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
@@ -268,472 +541,212 @@
                     {
                       "workerIndex": 2,
                       "parallelIndex": 2,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
+                      "status": "passed",
+                      "duration": 2975,
+                      "errors": [],
+                      "stdout": [
                         {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "text": "Electronics category link not found\n"
                         }
                       ],
-                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-21T05:17:32.580Z",
+                      "startTime": "2025-08-25T11:00:17.006Z",
                       "annotations": [],
                       "attachments": []
-                    },
-                    {
-                      "workerIndex": 7,
-                      "parallelIndex": 2,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
-                        {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/chromium-1187/chrome-mac/Chromium.app/Contents/MacOS/Chromium\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 1,
-                      "startTime": "2025-08-21T05:17:32.909Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/mcp-demo-MCP-Auto-Healing-Demo-add-to-cart-with-MCP-chromium-retry1/trace.zip"
-                        }
-                      ]
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "4637cdedc66d7cc14d4f-62022d0391c3276b8a8f",
-              "file": "mcp-demo.spec.ts",
-              "line": 55,
+              "id": "884a02874a5c41c56569-64e4051c5602fa93ef44",
+              "file": "amazon.spec.ts",
+              "line": 54,
               "column": 7
             },
             {
-              "title": "login flow with MCP auto-healing",
+              "title": "Amazon login form interaction",
               "ok": false,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 30000,
+                  "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "firefox",
-                  "projectName": "firefox",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
                   "results": [
                     {
                       "workerIndex": 3,
                       "parallelIndex": 3,
                       "status": "failed",
-                      "duration": 1,
+                      "duration": 35271,
                       "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                        "message": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"domcontentloaded\" event fired\n  \"load\" event fired\n============================================================",
+                        "stack": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"domcontentloaded\" event fired\n  \"load\" event fired\n============================================================\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:81:16",
+                        "location": {
+                          "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                          "column": 16,
+                          "line": 81
+                        },
+                        "snippet": "  79 |     \n  80 |     // Wait for login form\n> 81 |     await page.waitForLoadState('networkidle');\n     |                ^\n  82 |     \n  83 |     // Verify login form is present (but don't fill with real credentials)\n  84 |     const emailInput = page.locator('#ap_email, #email');"
                       },
                       "errors": [
                         {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "location": {
+                            "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                            "column": 16,
+                            "line": 81
+                          },
+                          "message": "TimeoutError: page.waitForLoadState: Timeout 30000ms exceeded.\n=========================== logs ===========================\n  \"domcontentloaded\" event fired\n  \"load\" event fired\n============================================================\n\n  79 |     \n  80 |     // Wait for login form\n> 81 |     await page.waitForLoadState('networkidle');\n     |                ^\n  82 |     \n  83 |     // Verify login form is present (but don't fill with real credentials)\n  84 |     const emailInput = page.locator('#ap_email, #email');\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:81:16"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-21T05:17:32.583Z",
-                      "annotations": [],
-                      "attachments": []
-                    },
-                    {
-                      "workerIndex": 9,
-                      "parallelIndex": 3,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
-                        {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 1,
-                      "startTime": "2025-08-21T05:17:32.911Z",
+                      "startTime": "2025-08-25T11:00:17.005Z",
                       "annotations": [],
                       "attachments": [
                         {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/mcp-demo-MCP-Auto-Healing--1d130--flow-with-MCP-auto-healing-firefox-retry1/trace.zip"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "4637cdedc66d7cc14d4f-ddf2353628f5b527df4d",
-              "file": "mcp-demo.spec.ts",
-              "line": 4,
-              "column": 7
-            },
-            {
-              "title": "search functionality with MCP",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "firefox",
-                  "projectName": "firefox",
-                  "results": [
-                    {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium/test-failed-1.png"
+                        },
                         {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium/error-context.md"
                         }
                       ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-21T05:17:32.580Z",
-                      "annotations": [],
-                      "attachments": []
+                      "errorLocation": {
+                        "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                        "column": 16,
+                        "line": 81
+                      }
                     },
-                    {
-                      "workerIndex": 8,
-                      "parallelIndex": 4,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
-                        {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 1,
-                      "startTime": "2025-08-21T05:17:32.902Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/mcp-demo-MCP-Auto-Healing-Demo-search-functionality-with-MCP-firefox-retry1/trace.zip"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "4637cdedc66d7cc14d4f-0a1ed0117a621cb83840",
-              "file": "mcp-demo.spec.ts",
-              "line": 38,
-              "column": 7
-            },
-            {
-              "title": "add to cart with MCP",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "firefox",
-                  "projectName": "firefox",
-                  "results": [
-                    {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
-                        {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-21T05:17:32.583Z",
-                      "annotations": [],
-                      "attachments": []
-                    },
-                    {
-                      "workerIndex": 12,
-                      "parallelIndex": 5,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
-                        {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 1,
-                      "startTime": "2025-08-21T05:17:32.911Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/mcp-demo-MCP-Auto-Healing-Demo-add-to-cart-with-MCP-firefox-retry1/trace.zip"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "4637cdedc66d7cc14d4f-1dc1b15c039706d57b5c",
-              "file": "mcp-demo.spec.ts",
-              "line": 55,
-              "column": 7
-            },
-            {
-              "title": "login flow with MCP auto-healing",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "webkit",
-                  "projectName": "webkit",
-                  "results": [
                     {
                       "workerIndex": 6,
-                      "parallelIndex": 6,
+                      "parallelIndex": 2,
                       "status": "failed",
-                      "duration": 1,
+                      "duration": 12452,
                       "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\u001b[22m\n\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:77:32",
+                        "location": {
+                          "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                          "column": 32,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     // Click on sign in\n  76 |     const signInButton = page.locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button');\n> 77 |     await expect(signInButton).toBeVisible();\n     |                                ^\n  78 |     await signInButton.click();\n  79 |     \n  80 |     // Wait for login form"
                       },
                       "errors": [
                         {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-21T05:17:32.580Z",
-                      "annotations": [],
-                      "attachments": []
-                    },
-                    {
-                      "workerIndex": 11,
-                      "parallelIndex": 6,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
-                        {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "location": {
+                            "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                            "column": 32,
+                            "line": 77
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\u001b[22m\n\n\n  75 |     // Click on sign in\n  76 |     const signInButton = page.locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button');\n> 77 |     await expect(signInButton).toBeVisible();\n     |                                ^\n  78 |     await signInButton.click();\n  79 |     \n  80 |     // Wait for login form\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:77:32"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 1,
-                      "startTime": "2025-08-21T05:17:32.916Z",
+                      "startTime": "2025-08-25T11:00:53.381Z",
                       "annotations": [],
                       "attachments": [
                         {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium-retry1/error-context.md"
+                        },
+                        {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/mcp-demo-MCP-Auto-Healing--1d130--flow-with-MCP-auto-healing-webkit-retry1/trace.zip"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "4637cdedc66d7cc14d4f-8a73e6f043bf17e21bd3",
-              "file": "mcp-demo.spec.ts",
-              "line": 4,
-              "column": 7
-            },
-            {
-              "title": "search functionality with MCP",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "webkit",
-                  "projectName": "webkit",
-                  "results": [
-                    {
-                      "workerIndex": 14,
-                      "parallelIndex": 4,
-                      "status": "failed",
-                      "duration": 0,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
-                        {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium-retry1/trace.zip"
                         }
                       ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-21T05:17:33.176Z",
-                      "annotations": [],
-                      "attachments": []
+                      "errorLocation": {
+                        "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                        "column": 32,
+                        "line": 77
+                      }
                     },
                     {
-                      "workerIndex": 16,
-                      "parallelIndex": 0,
+                      "workerIndex": 7,
+                      "parallelIndex": 2,
                       "status": "failed",
-                      "duration": 0,
+                      "duration": 2651,
                       "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button') resolved to 3 elements:\n    1) <div class=\"nav-div\" id=\"nav-link-accountList\">…</div> aka locator('#nav-link-accountList')\n    2) <a data-nav-role=\"signin\" class=\"nav-action-signin-button\" data-nav-ref=\"nav_custrec_signin\" href=\"https://www.amazon.com/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3Fref_%3Dnav_custrec_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0\">…</a> aka getByRole('link', { name: 'Sign in', exact: true })\n    3) <a class=\"nav-a\" aria-label=\"New to Amazon? Start here to create an account\" href=\"https://www.amazon.com/ap/register?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3F_encoding%3DUTF8%26ref_%3Dnav_custrec_newcust&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth…>Start here.</a> aka getByRole('link', { name: 'New to Amazon? Start here to' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button') resolved to 3 elements:\n    1) <div class=\"nav-div\" id=\"nav-link-accountList\">…</div> aka locator('#nav-link-accountList')\n    2) <a data-nav-role=\"signin\" class=\"nav-action-signin-button\" data-nav-ref=\"nav_custrec_signin\" href=\"https://www.amazon.com/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3Fref_%3Dnav_custrec_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0\">…</a> aka getByRole('link', { name: 'Sign in', exact: true })\n    3) <a class=\"nav-a\" aria-label=\"New to Amazon? Start here to create an account\" href=\"https://www.amazon.com/ap/register?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3F_encoding%3DUTF8%26ref_%3Dnav_custrec_newcust&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth…>Start here.</a> aka getByRole('link', { name: 'New to Amazon? Start here to' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\u001b[22m\n\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:77:32",
+                        "location": {
+                          "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                          "column": 32,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     // Click on sign in\n  76 |     const signInButton = page.locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button');\n> 77 |     await expect(signInButton).toBeVisible();\n     |                                ^\n  78 |     await signInButton.click();\n  79 |     \n  80 |     // Wait for login form"
                       },
                       "errors": [
                         {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                          "location": {
+                            "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                            "column": 32,
+                            "line": 77
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button') resolved to 3 elements:\n    1) <div class=\"nav-div\" id=\"nav-link-accountList\">…</div> aka locator('#nav-link-accountList')\n    2) <a data-nav-role=\"signin\" class=\"nav-action-signin-button\" data-nav-ref=\"nav_custrec_signin\" href=\"https://www.amazon.com/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3Fref_%3Dnav_custrec_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0\">…</a> aka getByRole('link', { name: 'Sign in', exact: true })\n    3) <a class=\"nav-a\" aria-label=\"New to Amazon? Start here to create an account\" href=\"https://www.amazon.com/ap/register?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3F_encoding%3DUTF8%26ref_%3Dnav_custrec_newcust&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth…>Start here.</a> aka getByRole('link', { name: 'New to Amazon? Start here to' })\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button')\u001b[22m\n\n\n  75 |     // Click on sign in\n  76 |     const signInButton = page.locator('#nav-link-accountList, #nav-signin-tooltip a, .nav-action-button');\n> 77 |     await expect(signInButton).toBeVisible();\n     |                                ^\n  78 |     await signInButton.click();\n  79 |     \n  80 |     // Wait for login form\n    at /Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts:77:32"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
-                      "retry": 1,
-                      "startTime": "2025-08-21T05:17:33.426Z",
+                      "retry": 2,
+                      "startTime": "2025-08-25T11:01:06.458Z",
                       "annotations": [],
                       "attachments": [
                         {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/mcp-demo-MCP-Auto-Healing-Demo-search-functionality-with-MCP-webkit-retry1/trace.zip"
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/amazon-Amazon-Website-Tests-Amazon-login-form-interaction-chromium-retry2/error-context.md"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/tests/amazon.spec.ts",
+                        "column": 32,
+                        "line": 77
+                      }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "4637cdedc66d7cc14d4f-8fb6f4fd2e6666db569c",
-              "file": "mcp-demo.spec.ts",
-              "line": 38,
-              "column": 7
-            },
-            {
-              "title": "add to cart with MCP",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "webkit",
-                  "projectName": "webkit",
-                  "results": [
-                    {
-                      "workerIndex": 15,
-                      "parallelIndex": 1,
-                      "status": "failed",
-                      "duration": 1,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
-                        {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-08-21T05:17:33.180Z",
-                      "annotations": [],
-                      "attachments": []
-                    },
-                    {
-                      "workerIndex": 17,
-                      "parallelIndex": 1,
-                      "status": "failed",
-                      "duration": 0,
-                      "error": {
-                        "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
-                        "stack": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                      },
-                      "errors": [
-                        {
-                          "message": "Error: browserType.launch: Executable doesn't exist at /Users/rudrasubodhmantri/Library/Caches/ms-playwright/webkit-2203/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 1,
-                      "startTime": "2025-08-21T05:17:33.433Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/Users/rudrasubodhmantri/Desktop/de-flake-tests/packages/deflake/test-results/mcp-demo-MCP-Auto-Healing-Demo-add-to-cart-with-MCP-webkit-retry1/trace.zip"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "4637cdedc66d7cc14d4f-7860887bf599549a947c",
-              "file": "mcp-demo.spec.ts",
-              "line": 55,
+              "id": "884a02874a5c41c56569-a04eebf09c1c73732a75",
+              "file": "amazon.spec.ts",
+              "line": 72,
               "column": 7
             }
           ]
@@ -743,11 +756,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-08-21T05:17:31.594Z",
-    "duration": 1864.4689999999998,
-    "expected": 0,
+    "startTime": "2025-08-25T11:00:11.817Z",
+    "duration": 87927.47300000001,
+    "expected": 1,
     "skipped": 0,
-    "unexpected": 9,
+    "unexpected": 3,
     "flaky": 0
   }
 }

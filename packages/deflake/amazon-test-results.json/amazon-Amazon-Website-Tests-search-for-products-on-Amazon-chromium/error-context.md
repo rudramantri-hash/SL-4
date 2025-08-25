@@ -1,0 +1,122 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - link "Amazon" [ref=e6] [cursor=pointer]:
+      - /url: /ref=nav_bb_logo
+    - search [ref=e8]:
+      - textbox "Search For" [ref=e11]
+      - button "Go" [ref=e12] [cursor=pointer]
+    - generic [ref=e13]:
+      - link "Your Account" [ref=e14] [cursor=pointer]:
+        - /url: /gp/css/homepage.html/ref=nav_bb_ya
+      - link "Help" [ref=e15] [cursor=pointer]:
+        - /url: /gp/help/customer/display.html/ref=nav_bb_help
+      - link "Cart" [ref=e16] [cursor=pointer]:
+        - /url: /gp/cart/view.html/ref=nav_bb_cart
+  - main [ref=e17]:
+    - list [ref=e25]:
+      - listitem [ref=e26]:
+        - generic [ref=e30]:
+          - img "Devices with Alexa. Image of Echo Show 15, Fire 7, Fire TV Stick (HD Stick with 2021 Alexa Voice Remote), and Echo Dot (3rd Gen)." [ref=e32]
+          - link "Devices with Alexa. Image of Echo Show 15, Fire 7, Fire TV Stick (HD Stick with 2021 Alexa Voice Remote), and Echo Dot (3rd Gen)." [ref=e33] [cursor=pointer]:
+            - /url: /b/?ie=UTF8&node=2102313011&ref_=ods_gw_eng_fallback_d_h1_xpl_xpl_050122&pd_rd_w=Gl6ro&content-id=amzn1.sym.e4604e79-d832-4db0-935e-170c8850449e&pf_rd_p=e4604e79-d832-4db0-935e-170c8850449e&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=tNFoF&pd_rd_r=2ce06757-82cc-4b62-ad3a-91c933e2a268
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e37]:
+          - heading "Prime Video" [level=2] [ref=e39]
+          - link "Prime Video Try 30 days for free" [ref=e40] [cursor=pointer]:
+            - /url: /gp/video/storefront/?ie=UTF8&pd_rd_w=SLGDg&content-id=amzn1.sym.bdc477ed-05db-4852-a6b9-774ab16b3ebb&pf_rd_p=bdc477ed-05db-4852-a6b9-774ab16b3ebb&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=RP51i&pd_rd_r=10053101-20a0-4a52-9465-faf1daa6535e&ref_=pd_gw_unk
+            - img "Prime Video" [ref=e43] [cursor=pointer]
+            - generic [ref=e45] [cursor=pointer]:
+              - generic [ref=e46] [cursor=pointer]: Try 30 days for free
+              - generic [ref=e47] [cursor=pointer]: Try 30 days for free
+        - generic [ref=e49]:
+          - heading "Customers' most-loved" [level=2] [ref=e51]
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - link "Women's fashion" [ref=e55] [cursor=pointer]:
+                - /url: /b/?ie=UTF8&node=19277531011&ref_=af_gw_quadtopcard_f_july_xcat_cml_1&pd_rd_w=Z5OwE&content-id=amzn1.sym.28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_p=28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=RP51i&pd_rd_r=10053101-20a0-4a52-9465-faf1daa6535e
+                - img "Women's fashion" [ref=e57] [cursor=pointer]
+                - generic [ref=e59] [cursor=pointer]: Women's fashion
+              - link "Men's fashion" [ref=e61] [cursor=pointer]:
+                - /url: /b/?ie=UTF8&node=19781749011&ref_=af_gw_quadtopcard_f_july_xcat_cml_2&pd_rd_w=Z5OwE&content-id=amzn1.sym.28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_p=28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=RP51i&pd_rd_r=10053101-20a0-4a52-9465-faf1daa6535e
+                - img "Men's fashion" [ref=e63] [cursor=pointer]
+                - generic [ref=e65] [cursor=pointer]: Men's fashion
+            - generic [ref=e66]:
+              - link "Beauty" [ref=e68] [cursor=pointer]:
+                - /url: /b/?ie=UTF8&node=20853252011&ref_=af_gw_quadtopcard_f_july_xcat_cml_3&pd_rd_w=Z5OwE&content-id=amzn1.sym.28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_p=28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=RP51i&pd_rd_r=10053101-20a0-4a52-9465-faf1daa6535e
+                - img "Beauty" [ref=e70] [cursor=pointer]
+                - generic [ref=e72] [cursor=pointer]: Beauty
+              - link "Home" [ref=e74] [cursor=pointer]:
+                - /url: /b/?ie=UTF8&node=20853249011&ref_=af_gw_quadtopcard_f_july_xcat_cml_4&pd_rd_w=Z5OwE&content-id=amzn1.sym.28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_p=28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=RP51i&pd_rd_r=10053101-20a0-4a52-9465-faf1daa6535e
+                - img "Home" [ref=e76] [cursor=pointer]
+                - generic [ref=e78] [cursor=pointer]: Home
+          - link "Discover items with 4+ stars" [ref=e80] [cursor=pointer]:
+            - /url: /b/?ie=UTF8&node=20850246011&ref_=af_gw_quadtopcard_f_july_xcat_cml&pd_rd_w=Z5OwE&content-id=amzn1.sym.28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_p=28c8c8b7-487d-484e-96c7-4d7d067b06ed&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=RP51i&pd_rd_r=10053101-20a0-4a52-9465-faf1daa6535e
+        - generic [ref=e82]:
+          - heading "Best Sellers in Outlet" [level=2] [ref=e84]
+          - link "Best Sellers in Outlet Shop now" [ref=e85] [cursor=pointer]:
+            - /url: /b/ref=OUT_BS_DSC_D_EN_US/?_encoding=UTF8&node=17900676011&pd_rd_w=U7JXR&content-id=amzn1.sym.18e45841-e775-4e74-b94d-1f4c16e3f31a&pf_rd_p=18e45841-e775-4e74-b94d-1f4c16e3f31a&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=RP51i&pd_rd_r=10053101-20a0-4a52-9465-faf1daa6535e&ref_=pd_gw_unk
+            - img "Best Sellers in Outlet" [ref=e88] [cursor=pointer]
+            - generic [ref=e90] [cursor=pointer]:
+              - generic [ref=e91] [cursor=pointer]: Shop now
+              - generic [ref=e92] [cursor=pointer]: Shop now
+        - generic [ref=e94]:
+          - heading "Amazon exclusive toys" [level=2] [ref=e96]
+          - link "Amazon exclusive toys See more" [ref=e97] [cursor=pointer]:
+            - /url: /b/?_encoding=UTF8&ie=UTF8&node=17403333011&pd_rd_w=8cRcp&content-id=amzn1.sym.1672c122-6f71-4c82-abf1-fccc9be5a8ec&pf_rd_p=1672c122-6f71-4c82-abf1-fccc9be5a8ec&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=RP51i&pd_rd_r=10053101-20a0-4a52-9465-faf1daa6535e&ref_=pd_gw_unk
+            - img "Amazon exclusive toys" [ref=e100] [cursor=pointer]
+            - generic [ref=e102] [cursor=pointer]:
+              - generic [ref=e103] [cursor=pointer]: See more
+              - generic [ref=e104] [cursor=pointer]: See more
+      - generic [ref=e106]:
+        - generic [ref=e108]:
+          - heading "Small space solutions" [level=2] [ref=e110]
+          - link "Small space furniture solutions Shop small space furniture & décor" [ref=e111] [cursor=pointer]:
+            - /url: /b/?ie=UTF8&node=21385226011&ref_=0824_smallspaces&pd_rd_w=q3q0V&content-id=amzn1.sym.a88b03a7-5fdb-4224-a417-8e06429861d6&pf_rd_p=a88b03a7-5fdb-4224-a417-8e06429861d6&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=4RKv0&pd_rd_r=216eac0c-33dd-4bf2-aa77-9e04d66fb902
+            - img "Small space furniture solutions" [ref=e114] [cursor=pointer]
+            - generic [ref=e116] [cursor=pointer]:
+              - generic [ref=e117] [cursor=pointer]: Shop small space furniture & décor
+              - generic [ref=e118] [cursor=pointer]: Shop small space furniture & décor
+        - generic [ref=e120]:
+          - heading "Save on pre-owned Amazon devices" [level=2] [ref=e122]
+          - link "Save on pre-owned Amazon devices See all pre-owned devices" [ref=e123] [cursor=pointer]:
+            - /url: /b/?ie=UTF8&node=8497978011&ref_=ods_gw_refurb_d_xpl_evrgn&pd_rd_w=nVvqr&content-id=amzn1.sym.450b4d03-ae80-4aac-8881-942e914f4094&pf_rd_p=450b4d03-ae80-4aac-8881-942e914f4094&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=4RKv0&pd_rd_r=216eac0c-33dd-4bf2-aa77-9e04d66fb902
+            - img "Save on pre-owned Amazon devices" [ref=e126] [cursor=pointer]
+            - generic [ref=e128] [cursor=pointer]:
+              - generic [ref=e129] [cursor=pointer]: See all pre-owned devices
+              - generic [ref=e130] [cursor=pointer]: See all pre-owned devices
+        - generic [ref=e132]:
+          - heading "Live plants & planters" [level=2] [ref=e134]
+          - link "Live plants & planters Shop plants, plant care & pots" [ref=e135] [cursor=pointer]:
+            - /url: /b/?ie=UTF8&node=20933248011&ref_=0713_plantsandplanters&pd_rd_w=vncew&content-id=amzn1.sym.28ed930b-f5c9-47c6-b9e4-d70638dd1d6b&pf_rd_p=28ed930b-f5c9-47c6-b9e4-d70638dd1d6b&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=4RKv0&pd_rd_r=216eac0c-33dd-4bf2-aa77-9e04d66fb902
+            - img "Live plants & planters" [ref=e138] [cursor=pointer]
+            - generic [ref=e140] [cursor=pointer]:
+              - generic [ref=e141] [cursor=pointer]: Shop plants, plant care & pots
+              - generic [ref=e142] [cursor=pointer]: Shop plants, plant care & pots
+        - generic [ref=e144]:
+          - heading "Easy, elevated t-shirts" [level=2] [ref=e146]
+          - link "Easy, elevated t-shirts See the full edit from Shopbop" [ref=e147] [cursor=pointer]:
+            - /url: /stores/page/2712FB81-2E38-404F-ADE3-2858C4903F3A/?_encoding=UTF8&channel=SB_gway&ref=sb_w_i_ctcdx_tshrt&pd_rd_w=Z1doC&content-id=amzn1.sym.8c51d289-00b4-426b-8144-365a3f32184a&pf_rd_p=8c51d289-00b4-426b-8144-365a3f32184a&pf_rd_r=Y8GWZ9DFBWW0TDN0Q47Z&pd_rd_wg=4RKv0&pd_rd_r=216eac0c-33dd-4bf2-aa77-9e04d66fb902&ref_=pd_gw_unk
+            - img "Easy, elevated t-shirts" [ref=e150] [cursor=pointer]
+            - generic [ref=e152] [cursor=pointer]:
+              - generic [ref=e153] [cursor=pointer]: See the full edit from Shopbop
+              - generic [ref=e154] [cursor=pointer]: See the full edit from Shopbop
+  - contentinfo [ref=e155]:
+    - link "Amazon" [ref=e157] [cursor=pointer]:
+      - /url: /ref=nav_bb_footer_logo
+      - img "Amazon" [ref=e158] [cursor=pointer]
+    - list [ref=e160]:
+      - listitem [ref=e161]:
+        - link "Conditions of Use" [ref=e162] [cursor=pointer]:
+          - /url: /gp/help/customer/display.html?ie=UTF8&nodeId=508088&ref_=footer_cou
+      - listitem [ref=e163]:
+        - link "Privacy Notice" [ref=e164] [cursor=pointer]:
+          - /url: /gp/help/customer/display.html?ie=UTF8&nodeId=468496&ref_=footer_privacy
+      - listitem [ref=e165]:
+        - link "Interest-Based Ads" [ref=e166] [cursor=pointer]:
+          - /url: /interestbasedads/ref=footer_iba
+      - listitem [ref=e167]: © 1996-2024, Amazon.com, Inc. or its affiliates
+```

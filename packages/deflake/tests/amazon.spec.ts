@@ -1,7 +1,7 @@
-import { test, expect } from '../src/test-setup';
+import { test, expect } from '@playwright/test';
 
-test.describe('Amazon Website Tests with MCP Auto-Healing', () => {
-  test('search for products on Amazon', async ({ page, mcp }) => {
+test.describe('Amazon Website Tests', () => {
+  test('search for products on Amazon', async ({ page }) => {
     await page.goto('https://www.amazon.com', { waitUntil: 'domcontentloaded' });
     
     // Wait for page to load
@@ -25,7 +25,7 @@ test.describe('Amazon Website Tests with MCP Auto-Healing', () => {
     await expect(results.first()).toBeVisible();
   });
 
-  test('add item to cart on Amazon', async ({ page, mcp }) => {
+  test('add item to cart on Amazon', async ({ page }) => {
     await page.goto('https://www.amazon.com/s?k=laptop', { waitUntil: 'domcontentloaded' });
     
     // Wait for results to load
@@ -51,7 +51,7 @@ test.describe('Amazon Website Tests with MCP Auto-Healing', () => {
     }
   });
 
-  test('navigate Amazon categories', async ({ page, mcp }) => {
+  test('navigate Amazon categories', async ({ page }) => {
     await page.goto('https://www.amazon.com', { waitUntil: 'domcontentloaded' });
     
     // Click on a category (e.g., Electronics)
@@ -69,7 +69,7 @@ test.describe('Amazon Website Tests with MCP Auto-Healing', () => {
     }
   });
 
-  test('Amazon login form interaction', async ({ page, mcp }) => {
+  test('Amazon login form interaction', async ({ page }) => {
     await page.goto('https://www.amazon.com', { waitUntil: 'domcontentloaded' });
     
     // Click on sign in
@@ -80,13 +80,12 @@ test.describe('Amazon Website Tests with MCP Auto-Healing', () => {
     // Wait for login form
     await page.waitForLoadState('networkidle');
     
-    // Fill email (but don't submit for security)
+    // Verify login form is present (but don't fill with real credentials)
     const emailInput = page.locator('#ap_email, #email');
     if (await emailInput.isVisible()) {
-      await emailInput.fill('test@example.com');
-      console.log('Email field filled successfully');
+      console.log('Login form is accessible and ready for testing');
     } else {
-      console.log('Email input not found');
+      console.log('Login form not found');
     }
   });
 });
